@@ -19,8 +19,8 @@ public class main {
 		System.out.println("4: Search by Title");
 		System.out.println("5: Search by Keyword");
 		System.out.println("6: Exit");
-		Scanner input = new Scanner(System.in);
-		int choice = input.nextInt();
+		Scanner input2 = new Scanner(System.in);
+		int choice = input2.nextInt();
 		if(choice==6)
 		{	while(true)
 			{
@@ -64,7 +64,7 @@ public class main {
 			}
 			System.out.println("Goodbye");
 			File del = new File("cache.txt");
-			input.close();
+			input2.close();
 			del.delete();
 			break;
 		}
