@@ -2,15 +2,10 @@ package lists;
 import java.util.*;
 import java.io.*;
 import javax.swing.JFileChooser;
-import java.nio.file.CopyOption;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 public class main {
-	public static HashMap Author = new HashMap();
-	public static ArrayList<Book> allBooks = new ArrayList();
-	public static ArrayList<List> allLists = new ArrayList();
+	public static HashMap<String, ArrayList<Book>> Author = new HashMap<String, ArrayList<Book>>();
+	public static ArrayList<Book> allBooks = new ArrayList<Book>();
+	public static ArrayList<List> allLists = new ArrayList<List>();
 	public static File newFile = new File("");
 	public static File original = new File("");
 	public static void main(String[] args) throws IOException {
@@ -69,6 +64,7 @@ public class main {
 			}
 			System.out.println("Goodbye");
 			File del = new File("cache.txt");
+			input.close();
 			del.delete();
 			break;
 		}
@@ -431,6 +427,7 @@ public class main {
 				System.out.println(allBooks.get(i).getTitle()+ " by "+ allBooks.get(i).getAuthor());
 			}
 		}
+		reader.close();
 	}
 }
 
