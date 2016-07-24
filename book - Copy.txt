@@ -1,0 +1,10 @@
+Title/Author First Name/Author Last name/genre/List
+Things to make and do in the Fourth Dimension/Matt/Parker/math/Mathematics
+Macbeth/William/Shakespeare/english/English
+Julius Caeser/William/Shakespeare/english/English
+Romeo and Juliet/William/Shakespeare/english/English
+Across the Board: The mathematics of Chessboard Problems/John/Watkins/math/Mathematics
+Euler's Gem/David/Richeson/math/Mathematics
+Charming Proofs: a journey into elegant mathematics/Claudi/Alsina/math/Mathematics
+Love and Math: heart of hidden reality/Edward/Trenkel/math/Mathematics
+Elliptic Tales: Curves, Counting and Number Theory/Avner/Ash/math/Mathematics
