@@ -34,7 +34,7 @@ public class List {
 	public void addBookToList (Book book){
 		ArrayList<Book> booklist = getListOfBooks();
 		booklist.add(book);		
-		System.out.println(book.getTitle() + " has been added to " + getListName());
+		System.out.println("Book: \"" + book.getTitle() + "\"; added to List: " + getListName());
 	}
 	public void removeBookFromList (Book book){
 		ArrayList<Book> booklist = getListOfBooks();
