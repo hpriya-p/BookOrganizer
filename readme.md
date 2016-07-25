@@ -2,7 +2,7 @@ Book Organizer
 ============
 Description
 ------------
-The book organizer reads a .txt file and generates book objects. Each book object is added to its respective list. The user is then redirected to the main menu which offers several functions for editing and searching the books. All changes are written to the file ``booksUpdated.txt``. Before exiting, the user is prompted to ``Save``, ``Save As``, or ``Quit without Saving``. The original and ``booksUpdated.txt`` files are manipulated accordingly. 
+The book organizer reads a .txt file and generates book objects. Each book object is added to its respective list. The user is then redirected to the main menu which offers several functions for editing and searching the books. All changes are written to the file ``booksUpdated.txt``.Before exiting, the user is prompted to ``Save``, ``Save As``, or ``Quit without Saving``. The original and ``booksUpdated.txt`` files are manipulated accordingly. It should be noted that all changes are written into ``booksUpdated.txt`` - hence please do not use ``booksUpdated.txt`` as the input file to read from. 
 
 Running the Program
 -------------------
@@ -36,5 +36,3 @@ Currently, the program supports the following functions, which can be accessed f
   * ``Save`` - overwrites original file
   * ``Save As`` - does not change original file. Keeps ``booksUpdated.txt`` which contains changes
   * ``Quit without Saving`` - deletes ``booksUpdated.txt`` and does not change original file.
-
-  
