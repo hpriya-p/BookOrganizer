@@ -23,7 +23,7 @@ Menu Functions
 Currently, the program supports the following functions, which can be accessed from the main menu:
 
 
-*``Edit Book`` - changes properties of the book. All changes are written into ``booksUpdated.txt``
+* ``Edit Book`` - changes properties of the book. All changes are written into ``booksUpdated.txt``
 
   *``Add to List`` - removes book from current list and adds it to a new list
   
