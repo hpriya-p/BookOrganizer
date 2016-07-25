@@ -23,10 +23,14 @@ Menu Functions
 Currently, the program supports the following functions, which can be accessed from the main menu:
 
 
- -``Edit Book`` - changes properties of the book. All changes are written into ``booksUpdated.txt``
-   -``Add to List`` - removes book from current list and adds it to a new list
+*``Edit Book`` - changes properties of the book. All changes are written into ``booksUpdated.txt``
+
+  *``Add to List`` - removes book from current list and adds it to a new list
+  
    *``Edit Title`` - replaces title with new string
+   
    *``Edit First Author`` - replaces author first/last name with new string(s)
+   
    *``Add/Edit Second Author`` - appends second author first name and last name to end of line in ``booksUpdated.txt``. If a second author was already present, the second author first/last names are replaced with new string(s). 
 *``See all items in a List`` - displays the title and author of every book in a given list
 *``Search by Title`` - displays all books with a given title
