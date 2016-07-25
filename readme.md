@@ -12,4 +12,4 @@ In Command prompt, ``cd`` into the directory which contains ``book.jar``. Then e
 Input Specifications
 --------------------
 Every line in the input .txt file is parsed as a single book object. Each line should be written as follows:
-``Title/Author First name/Author Last name/genre/List name``
+>``Title/Author First name/Author Last name/genre/List name``
