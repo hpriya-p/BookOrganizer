@@ -12,6 +12,7 @@ public class main {
 		addBook();
 		while(true)
 		{
+		//Main Menu
 		System.out.println("\nPlease type the corresponding number to select a function from the menu below:\n");
 		System.out.println("1: Edit Book");
 		System.out.println("2: Search by Author");
@@ -130,6 +131,13 @@ public class main {
 			System.out.println("Invalid Argument: Please try again.");
 		}}
 	}
+	
+	/* method: addBook()
+	 * input : void
+	 * output: void
+	 * description: Prompts user to choose a .txt file. Reads and parses the file to generate book objects, 
+	 * 				list objects, and adds books to respective lists. 
+	 */
   public static void addBook ()throws IOException
   {	
 	JFileChooser fileChooser = new JFileChooser();
@@ -186,7 +194,12 @@ public class main {
 	 }
 	
    }
-
+  /* method: editBook()
+	 * input : Book object
+	 * output: void
+	 * description: Prompts the user to select an item from the menu. 
+	 * 				Using user input, the method edits various properties of a given book.
+	 */
    public static void editBook (Book toBeEdited) throws IOException
    {
 		System.out.println("\bPlease select an item from the menu below:");
@@ -251,6 +264,12 @@ public class main {
 			editBook(toBeEdited);
 		}
 	}
+   
+   /* method: writeToFile()
+	 * input : Book object, String, integer
+	 * output: void
+	 * description: Overwrites a required segment of a line (determined using the inputs) in the file "booksUpdated.txt". 
+	 */
 	public static void writeToFile (Book book, String string, int index) throws IOException
 	{
 		FileReader toRead = new FileReader("cache.txt");
@@ -292,6 +311,13 @@ public class main {
 		cache.close();
 		br.close();
 	}
+	
+	/* method: addToHashMaps()
+	 * input : Book object
+	 * output: void
+	 * description: This method adds a book to the "Author" HashMap. The key is the book's author(s), 
+	 * 				and the value is an ArrayList of Book objects
+	 */
 	public static void addToHashMaps(Book book) {
 		String author1FirstName = book.getAuthorFirstname().toLowerCase();
 		String author1LastName = book.getAuthorLastname().toLowerCase();
@@ -307,6 +333,12 @@ public class main {
 		Author.put(key, value);
 	}
 	
+	/* method: searchHashMap()
+	 * input : void
+	 * output: void
+	 * description: This method collects the first and last names of an author (type: String) from the user 
+	 * 				It searches the HashMap "Author" and displays all books which have the same author. 
+	 */
 	public static void searchHashMap()
 	{	
 		System.out.println("Please enter the name of the Author you wish to search for");
@@ -377,6 +409,13 @@ public class main {
 
 	}
 	
+	
+	/* method: searchByList()
+	 * input : void
+	 * output: void
+	 * description: This method displays all existing lists and then collects a list name (type: String)
+	 * 				from the user, and displays all book objects within the list. 
+	 */
 	public static void searchByList()
 	{
 		System.out.println("Please select a list from below:");
@@ -391,6 +430,13 @@ public class main {
 		printList(list);
 		//reader.close();
 	}
+	
+	/* method: printList()
+	 * input : List object
+	 * output: void
+	 * description: This method takes a book list (type: List) as its input. It displays 
+	 * 				the title and author of every book in the list.  
+	 */
 	public static void printList(List booklist)
 	{
 		for (int i=0; i<booklist.getListOfBooks().size(); i++)
@@ -398,6 +444,13 @@ public class main {
 			System.out.println(booklist.getListOfBooks().get(i).getTitle()+ " by "+booklist.getListOfBooks().get(i).getAuthor());
 		}
 	}
+	
+	/* method: getBookFromName()
+	 * input : String
+	 * output: Book object
+	 * description: This method takes a book's title (type: String) as its input. It returns the 
+	 * 				Book object which corresponds to the title. It is case insensitive. 
+	 */
 	public static Book getBookFromName(String name)
 	{
 		name = name.toLowerCase();
@@ -413,6 +466,13 @@ public class main {
 		System.out.println("Could not find the book.");
 		return null;
 	}
+	
+	/* method: getListFromName()
+	 * input : String
+	 * output: List object
+	 * description: This method takes the list name (type: String) as its input. It returns the 
+	 * 				List object which corresponds to list name. It is case insensitive. 
+	 */
 	public static List getListFromName(String name)
 	{
 		name = name.toLowerCase();
@@ -429,38 +489,55 @@ public class main {
 		System.out.println("Could not find the list.");
 		return null;
 	}
+	
+	
+	/* method: searchByTitle()
+	 * input : void
+	 * output: void
+	 * description: This method collects a title (type: String) from the user, and displays all 
+	 * 				book objects which have the same title. It is case insensitive. 
+	 */
 	public static void searchByTitle()
 	{	
 		System.out.println("Please enter the title of the book you are looking for");
 		Scanner reader = new Scanner(System.in);
-		String keyword = reader.nextLine();
+		String title = reader.nextLine();
 		
 		for (int i=0; i<allBooks.size(); i++)
 		{
-			if (allBooks.get(i).getTitle().toLowerCase().contains(keyword.toLowerCase()))
+			if (allBooks.get(i).getTitle().toLowerCase().contains(title.toLowerCase()))
 			{
 				System.out.println(allBooks.get(i).getTitle());
 			}
 		}
 		//reader.close();
 	}
+	
+	
 	/* method: searchByKeyword()
 	 * input : void
 	 * output: void
-	 * description: this method collects the title of the book user is looking for via keyboard. Based on
-	 * the keywords entered, available books in the list will be displayed. The search is case insensitive.
+	 * description: This method collects a keyword (type: String) from the user, and displays all book objects 
+	 *              which contain the keyword in one of its fields (namely title, author, or genre).
+	 *              It is case insensitive. 
 	 */
 	public static void searchByKeyword()
 	{	
 		System.out.println("Please enter the title of the book you are looking for");
 		Scanner reader = new Scanner(System.in);
 		String keyword = reader.nextLine();
+		boolean noResult = true;
 		for (int i=0; i<allBooks.size(); i++)
 		{
 			if (allBooks.get(i).getTitle().toLowerCase().contains(keyword.toLowerCase())|| allBooks.get(i).getAuthor().toLowerCase().contains(keyword.toLowerCase())||allBooks.get(i).getGenre().toLowerCase().contains(keyword.toLowerCase()))
 			{
 				System.out.println(allBooks.get(i).getTitle()+ " by "+ allBooks.get(i).getAuthor());
+				noResult = false;
 			}
+		}
+		if(noResult)
+		{
+			System.out.println("No entries match your query");
 		}
 		//reader.close();
 	}
