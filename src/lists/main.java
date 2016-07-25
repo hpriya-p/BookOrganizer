@@ -8,28 +8,36 @@ public class main {
 	public static ArrayList<List> allLists = new ArrayList<List>();
 	public static File newFile = new File("");
 	public static File original = new File("");
-	public static void main(String[] args) throws IOException {
+	public static void main (String[] args) throws IOException {
 		addBook();
 		while(true)
 		{
-		System.out.println("Please type the corresponding number to select a function from the menu below:");
+		System.out.println("\nPlease type the corresponding number to select a function from the menu below:\n");
 		System.out.println("1: Edit Book");
 		System.out.println("2: Search by Author");
 		System.out.println("3: See all items in a List");
 		System.out.println("4: Search by Title");
 		System.out.println("5: Search by Keyword");
-		System.out.println("6: Exit");
+		System.out.println("6: Exit\n");
 		Scanner input2 = new Scanner(System.in);
 		int choice = input2.nextInt();
-		if(choice==6)
-		{	while(true)
+		if(choice == 6)
+		/* Make sure to save the changes before exiting. The while loop below will collect user input
+		 * and perform the action based on that before exiting the program. The user has 3 options:
+		 * 	1) Save: the user's original input file is overwritten by "booksUpdated.txt" and "booksUpdated.txt" is deleted
+		 *  2) Save As: the user's original input file is left unchanged; "booksUpdated.txt" is not deleted
+		 *  3) Quit Without Saving: the user's original input file is left unchanged. "booksUpdated.txt" is not deleted
+		 */
+		{	
+			while(true)
 			{
-				System.out.println("Would you like to save your changes?");
+				System.out.println("\n\bWould you like to save your changes?\b");
 				System.out.println("1: Save");
 				System.out.println("2: Save As");
 				System.out.println("3: Quit without Saving");
 				Scanner saving = new Scanner(System.in);
 				int toSave = saving.nextInt();
+	//			saving.close();
 				switch(toSave)
 				{
 				case 1:
@@ -53,7 +61,7 @@ public class main {
 					del2.delete();
 					break;
 				default:
-					System.out.println("Invalid Command. Please Try again");
+					System.out.println("Invalid Command. Please Try again.");
 					break;
 				}
 				if(toSave<4)
@@ -62,39 +70,43 @@ public class main {
 				}
 				
 			}
-			System.out.println("Goodbye");
+			System.out.println("Goodbye\n");
 			File del = new File("cache.txt");
-			input2.close();
 			del.delete();
 			break;
 		}
+		//input2.close();
+
 		switch(choice)
 		{
 		case 1:
-			System.out.println("Please enter the title of the book you wish to edit");
 			Scanner bookTitle = new Scanner(System.in);
+			System.out.println("Please enter the Title of the book you wish to edit.");
 			String title = bookTitle.nextLine();
 			Book book = getBookFromName(title);
-			while(true)
+			while (true)
 			{
-			if(book == null)
-			{
+			  if (book == null)
+			  {
 				System.out.println("Did you mean:");
 				for(int i=0; i<allBooks.size(); i++)
 				{
-					if(allBooks.get(i).getTitle().toLowerCase().contains(title.toLowerCase())|| allBooks.get(i).getAuthor().toLowerCase().contains(title.toLowerCase())||allBooks.get(i).getGenre().toLowerCase().contains(title.toLowerCase()))
+				   if ( allBooks.get(i).getTitle().toLowerCase().contains(title.toLowerCase())|| 
+					    allBooks.get(i).getAuthor().toLowerCase().contains(title.toLowerCase())||
+					    allBooks.get(i).getGenre().toLowerCase().contains(title.toLowerCase() ) )
 					{
-						System.out.println(allBooks.get(i).getTitle()+ " by "+ allBooks.get(i).getAuthor());
+						System.out.println("\"" + allBooks.get(i).getTitle()+ "\" by "+ allBooks.get(i).getAuthor());
 					}
 				}
-				System.out.println("Please enter the title of the book you wish to edit");
-				Scanner bookTitle2 = new Scanner(System.in);
+				System.out.println("Please enter the title (text within \") of the book you wish to edit");
+				
 				title = bookTitle.nextLine();
 				book = getBookFromName(title);
-			}
-			else{
+			  }
+			  else
+			  {
 				break;
-			}
+			  }
 			}
 			editBook(book);
 			break;
@@ -115,16 +127,18 @@ public class main {
 			System.out.println("");
 			break;
 		default:
-			System.out.println("Invalid Argument: Please try again");
+			System.out.println("Invalid Argument: Please try again.");
 		}}
 	}
-	public static void addBook ()throws IOException
-	{		
+  public static void addBook ()throws IOException
+  {	
 	JFileChooser fileChooser = new JFileChooser();
 	fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
 	int result = fileChooser.showOpenDialog(null);
 	if(result == JFileChooser.APPROVE_OPTION)
-	{	original = fileChooser.getSelectedFile();
+	{	
+		System.out.println("Reading text file \n"); 
+		original = fileChooser.getSelectedFile();
 		newFile = fileChooser.getSelectedFile();
 		FileReader toRead = new FileReader(newFile);
 		
@@ -169,13 +183,13 @@ public class main {
 	 
 		br.close();
 		copier.close();
-	}
+	 }
 	
-		}
+   }
 
-	public static void editBook (Book toBeEdited) throws IOException
-	{
-		System.out.println("Please select an item from the menu below:");
+   public static void editBook (Book toBeEdited) throws IOException
+   {
+		System.out.println("\bPlease select an item from the menu below:");
 		System.out.println("1: Add to List");
 		System.out.println("2: Add a second author");
 		System.out.println("3: Edit Title");
@@ -183,12 +197,13 @@ public class main {
 		System.out.println("5: Exit");
 		Scanner reader = new Scanner(System.in);
 		int choice = reader.nextInt();
+		//reader.close();
 		switch(choice)
 		{
 		case 1:
 			String oldList = toBeEdited.getListName();
 			List old = getListFromName(oldList);
-			System.out.println("Please enter the name of the list");
+			System.out.println("Please enter the name of the list:");
 			Scanner listReader = new Scanner(System.in);
 			String listName = listReader.nextLine();
 			List list = getListFromName(listName);
@@ -283,151 +298,171 @@ public class main {
 		String author2FirstName = book.getAuthor2Firstname().toLowerCase();
 		String author2LastName = book.getAuthor2Lastname().toLowerCase();
 		String key = author1FirstName+"/"+author1LastName+"/"+author2FirstName+"/"+author2LastName;
-		ArrayList value = new ArrayList();
-		if(Author.containsKey(key)){
-			value = (ArrayList) Author.get(key);
+		ArrayList<Book> value = new ArrayList<Book>();
+		if(Author.containsKey(key))
+		{
+			value = (ArrayList<Book>) Author.get(key);
 		}
 		value.add(book);
 		Author.put(key, value);
 	}
 	
 	public static void searchHashMap()
-	{	System.out.println("Please write the name of the author you wish to search for");
-	System.out.print("First Name:");
-	Scanner scan = new Scanner(System.in);
+	{	
+		System.out.println("Please enter the name of the Author you wish to search for");
+	    System.out.print("First Name:");
+	    Scanner scan = new Scanner(System.in);
 		String authorFirstName = scan.nextLine();
-	System.out.print("Last Name:");
+	    System.out.print("Last Name:");
 		String authorLastName = scan.nextLine();
-	System.out.println("");
+	    System.out.println("\n");
 		authorFirstName = authorFirstName.toLowerCase();
 		authorLastName = authorLastName.toLowerCase();
-		ArrayList allKeys = new ArrayList(Author.keySet());
-		ArrayList desiredKeys = new ArrayList();
-		for(int i=0; i<allKeys.size(); i++)
-		{	String key = (String)allKeys.get(i);
+		ArrayList<String> allKeys = new ArrayList<String>(Author.keySet());
+		ArrayList<String> desiredKeys = new ArrayList<String>();
+		for (int i=0; i<allKeys.size(); i++)
+		{	
+			String key = (String)allKeys.get(i);
 			String[]parsedKey = key.split("/");
 			String fn1 = parsedKey[0];
 			String ln1 = parsedKey[1];
 			String fn2 = "";
 			String ln2 = "";
-			if(parsedKey.length>2){
+			if (parsedKey.length>2)
+			{
 				fn2 = parsedKey[2];
 				ln2 = parsedKey[3];
 			}
-			if(authorFirstName.length()>0){
-				if(authorLastName.length()>0)
+			if (authorFirstName.length()>0)
+			{
+				if (authorLastName.length()>0)
 				{
-					if((authorFirstName.equals(fn1)|| authorFirstName.equals(fn2)) && (authorLastName.equals(ln1) || authorLastName.equals(ln2)))
+					if ((authorFirstName.equals(fn1)|| authorFirstName.equals(fn2)) && 
+						(authorLastName.equals(ln1) || authorLastName.equals(ln2)))
 					{
 						desiredKeys.add(key);
 					}
 				}
-				else {
-					if(authorFirstName.equals(fn1) || authorFirstName.equals(fn2))
+				else 
+				{
+					if (authorFirstName.equals(fn1) || authorFirstName.equals(fn2))
 					{
 						desiredKeys.add(key);
 					}
 				}
 			}
-			else{
-				if(authorLastName.equals(ln1) || authorLastName.equals(ln2))
+			else
+			{
+				if (authorLastName.equals(ln1) || authorLastName.equals(ln2))
 				{
 					desiredKeys.add(key);
 				}
 			}
 		}
-		for(int j = 0; j<desiredKeys.size();j++){
+		for (int j = 0; j<desiredKeys.size(); j++)
+		{
 			String newkey = (String)desiredKeys.get(j);
-			ArrayList booklist = (ArrayList)Author.get(newkey);
+			ArrayList<Book> booklist = (ArrayList<Book>)Author.get(newkey);
 			for(int i = 0; i<booklist.size();i++)
 			{
 				Book book = (Book)booklist.get(i);
 				System.out.println(book.getTitle() + " by " + book.getAuthor());
 			}
 		}	
-		if(desiredKeys.isEmpty())
+		if (desiredKeys.isEmpty())
 		{
 			System.out.println("Author not found");
 		}
+		//scan.close();
+
 	}
 	
 	public static void searchByList()
 	{
 		System.out.println("Please select a list from below:");
-		for(int i=0; i<allLists.size();i++)
+		for (int i=0; i<allLists.size(); i++)
 		{
-			
 			System.out.println(allLists.get(i).getListName());
-			
 		}
 		Scanner reader = new Scanner(System.in);
 		String name = reader.nextLine();
 		name = name.toLowerCase();
 		List list = getListFromName(name);
 		printList(list);
+		//reader.close();
 	}
 	public static void printList(List booklist)
 	{
-		for(int i=0; i<booklist.getListOfBooks().size();i++){
+		for (int i=0; i<booklist.getListOfBooks().size(); i++)
+		{
 			System.out.println(booklist.getListOfBooks().get(i).getTitle()+ " by "+booklist.getListOfBooks().get(i).getAuthor());
 		}
 	}
 	public static Book getBookFromName(String name)
 	{
 		name = name.toLowerCase();
-		for(int i=0; i<allBooks.size();i++)
+		for (int i=0; i<allBooks.size(); i++)
 		{
 			String title = allBooks.get(i).getTitle().toLowerCase();
-			if(title.equals(name))
+			if (title.equals(name))
 			{
 				Book book = allBooks.get(i);
 				return book;
 			}
-			
 		}
-		System.out.println("Could not find book");
+		System.out.println("Could not find the book.");
 		return null;
 	}
 	public static List getListFromName(String name)
 	{
 		name = name.toLowerCase();
-		for(int i=0; i<allLists.size();i++)
+		for (int i=0; i<allLists.size(); i++)
 		{
 			String title = allLists.get(i).getListName().toLowerCase();
-			if(title.equals(name))
+
+			if (title.equals(name))
 			{
 				List list = allLists.get(i);
 				return list;
 			}
-			
 		}
-		System.out.println("Could not find list");
+		System.out.println("Could not find the list.");
 		return null;
 	}
 	public static void searchByTitle()
-	{	System.out.println("Please enter the title of the book you are looking for");
+	{	
+		System.out.println("Please enter the title of the book you are looking for");
 		Scanner reader = new Scanner(System.in);
 		String keyword = reader.nextLine();
-		for(int i=0; i<allBooks.size(); i++)
+		
+		for (int i=0; i<allBooks.size(); i++)
 		{
-			if(allBooks.get(i).getTitle().toLowerCase().contains(keyword.toLowerCase()))
+			if (allBooks.get(i).getTitle().toLowerCase().contains(keyword.toLowerCase()))
 			{
 				System.out.println(allBooks.get(i).getTitle());
 			}
 		}
+		//reader.close();
 	}
+	/* method: searchByKeyword()
+	 * input : void
+	 * output: void
+	 * description: this method collects the title of the book user is looking for via keyboard. Based on
+	 * the keywords entered, available books in the list will be displayed. The search is case insensitive.
+	 */
 	public static void searchByKeyword()
-	{	System.out.println("Please enter the title of the book you are looking for");
+	{	
+		System.out.println("Please enter the title of the book you are looking for");
 		Scanner reader = new Scanner(System.in);
 		String keyword = reader.nextLine();
-		for(int i=0; i<allBooks.size(); i++)
+		for (int i=0; i<allBooks.size(); i++)
 		{
-			if(allBooks.get(i).getTitle().toLowerCase().contains(keyword.toLowerCase())|| allBooks.get(i).getAuthor().toLowerCase().contains(keyword.toLowerCase())||allBooks.get(i).getGenre().toLowerCase().contains(keyword.toLowerCase()))
+			if (allBooks.get(i).getTitle().toLowerCase().contains(keyword.toLowerCase())|| allBooks.get(i).getAuthor().toLowerCase().contains(keyword.toLowerCase())||allBooks.get(i).getGenre().toLowerCase().contains(keyword.toLowerCase()))
 			{
 				System.out.println(allBooks.get(i).getTitle()+ " by "+ allBooks.get(i).getAuthor());
 			}
 		}
-		reader.close();
+		//reader.close();
 	}
 }
 
