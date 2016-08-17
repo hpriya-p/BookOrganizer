@@ -8,6 +8,7 @@ public class main {
 	public static ArrayList<List> allLists = new ArrayList<List>();
 	public static File newFile = new File("");
 	public static File original = new File("");
+	public static String newName = "";
 	public static void main (String[] args) throws IOException {
 		addBook();
 		while(true)
@@ -52,13 +53,13 @@ public class main {
 					writer.close();
 					brUpdated.close();
 					readUpdated.close();
-					File del = new File("booksUpdated.txt");
+					File del = new File(newName);
 					del.delete();
 					break;
 				case 2:
 					break;
 				case 3:
-					File del2 = new File("booksUpdated.txt");
+					File del2 = new File(newName);
 					del2.delete();
 					break;
 				default:
@@ -147,6 +148,8 @@ public class main {
 	{	
 		System.out.println("Reading text file \n"); 
 		original = fileChooser.getSelectedFile();
+		String originalName = original.getName();
+		newName = originalName+"_updated";
 		newFile = fileChooser.getSelectedFile();
 		FileReader toRead = new FileReader(newFile);
 		
@@ -273,10 +276,10 @@ public class main {
 	public static void writeToFile (Book book, String string, int index) throws IOException
 	{
 		FileReader toRead = new FileReader("cache.txt");
-		File updated = new File("booksUpdated.txt");
+		File updated = new File(newName);
 		BufferedReader br = new BufferedReader(toRead);
 		String line = null;
-		PrintWriter writer = new PrintWriter("booksUpdated.txt");
+		PrintWriter writer = new PrintWriter(newName);
 		while ((line = br.readLine()) != null) {
 			String[] parsing = line.split("/");
 			
